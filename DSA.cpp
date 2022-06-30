@@ -4,8 +4,7 @@
 using namespace std;
 
 struct Pair {
-    int numi;
-    float numf;
+    size_t num;
     int code;
 };
 
@@ -17,9 +16,8 @@ public:
         friend class Stack;
     public:
         Node(): next(nullptr) {};
-        Node(string e, bool f) {
-            if (f == 0) data.numi = stoi(e);
-            else data.numf = stof(e);
+        Node(int e, bool f) {
+            data.num = e;
             data.code = f;
             next = nullptr;
         }
@@ -34,15 +32,16 @@ public:
 };
 
 void Stack::insert(string id, string var){
-    bool check; if (id == "i") check = 0; else check = 1;
+    double numD = stod(var);
+
     if (!head) {
-        head = new Node(var,check);
+        head = new Node(numD,true);
         return;
     }
     Node *tmp = head;
     while (tmp) {
         if (!tmp->next) {
-            tmp->next = new Node (var,check);
+            tmp->next = new Node (numD,true);
             return;
         }
         tmp = tmp->next;
@@ -55,15 +54,12 @@ void Stack::get_value(){
         return;
     }
     Node *tmp = head;
-    int i = 1;
     while (tmp) {
-        cout << i << " " << tmp->data.numi << ' ' << tmp->data.numf << ' ' << tmp->data.code << endl;
+        cout << tmp->data.num << ' ' << tmp->data.code << endl;
         tmp = tmp->next;
-        i++;
     }
     return;
 }
-
 void readfile (string file_name) {
     fstream filename;
     Stack newhead;
@@ -83,13 +79,15 @@ void readfile (string file_name) {
         //cout << id << endl << var << endl;
         newhead.insert(id, var);
         newhead.get_value();
-        if (!filename.eof()) cout << "====================" <<endl;
+        cout << "====================" <<endl;
     }
 }
 
 int main(){
     string file_name = "test.txt";
     readfile (file_name);
+    Pair p;
+    p.num = 9;
+    p.code = 1;
     return 0;
-    
 }

@@ -1,3 +1,3 @@
 # Su-and-Friend
 
-Rule: Dont do anything stupid
+Rule: Don't do anything stupid
