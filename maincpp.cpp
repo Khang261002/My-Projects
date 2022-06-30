@@ -18,10 +18,10 @@ public:
     public:
         Node(): next(nullptr) {};
         Node(string e, bool f) {
-            if (f == 0) data.numi = stoi(e);
-            else data.numf = stof(e);
-            data.code = f;
-            next = nullptr;
+            if (f == 0) this->data.numi = stoi(e);
+            else this->data.numf = stof(e);
+            this->data.code = f;
+            this->next = nullptr;
         }
     };
 protected:
