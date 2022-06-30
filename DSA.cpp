@@ -71,18 +71,20 @@ void readfile(string file_name) {
     string cmd = "";
     while (!filename.eof()) {
         getline(filename, cmd);
-        string id = "";
-        string var = "";
-        bool check = false;
-        for (int i = 0; i < int(cmd.size());i++){
-            if (cmd[i] == ' ')
-                check = true;
-            else if (!check) id +=cmd[i];
-            else var += cmd[i];
+        if (!cmd.empty()) {
+            string id = "";
+            string var = "";
+            bool check = false;
+            for (int i = 0; i < int(cmd.size());i++){
+                if (cmd[i] == ' ')
+                    check = true;
+                else if (!check) id +=cmd[i];
+                else var += cmd[i];
+            }
+            new_head.insert(id, var);
+            new_head.get_value();
+            if (!filename.eof()) cout << "====================" << endl;
         }
-        new_head.insert(id, var);
-        new_head.get_value();
-        if (!filename.eof()) cout << "====================" << endl;
     }
 }
 
