@@ -4,7 +4,7 @@
 using namespace std;
 
 struct Pair {
-    size_t num;
+    float num;
     int code;
 };
 
@@ -16,8 +16,8 @@ public:
         friend class Stack;
     public:
         Node(): next(nullptr) {};
-        Node(int e, bool f) {
-            data.num = e;
+        Node(string e, bool f) {
+            data.num = stof(e);
             data.code = f;
             next = nullptr;
         }
@@ -25,48 +25,52 @@ public:
 protected:
     Node *head;
 public:
-    Stack(): head(nullptr){};
-    ~Stack(){}
+    Stack(): head(nullptr) {};
+    ~Stack() {}
     void insert(string id, string var);
     void get_value();
 };
 
-void Stack::insert(string id, string var){
-    double numD = stod(var);
-
+void Stack::insert(string id, string var) {
+    bool check;
+    if (id == "i") check = 0;
+    else check = 1;
     if (!head) {
-        head = new Node(numD,true);
+        head = new Node(var, check);
         return;
     }
     Node *tmp = head;
     while (tmp) {
         if (!tmp->next) {
-            tmp->next = new Node (numD,true);
+            tmp->next = new Node(var, check);
             return;
         }
         tmp = tmp->next;
     }
 }
 
-void Stack::get_value(){
+void Stack::get_value() {
     if (!head) {
         cout << "invalid";
         return;
     }
     Node *tmp = head;
+    int i = 1;
     while (tmp) {
         cout << tmp->data.num << ' ' << tmp->data.code << endl;
         tmp = tmp->next;
+        i++;
     }
     return;
 }
-void readfile (string file_name) {
+
+void readfile(string file_name) {
     fstream filename;
-    Stack newhead;
+    Stack new_head;
     filename.open(file_name);
     string cmd = "";
     while (!filename.eof()) {
-        getline (filename,cmd);
+        getline(filename, cmd);
         string id = "";
         string var = "";
         bool check = false;
@@ -74,20 +78,17 @@ void readfile (string file_name) {
             if (cmd[i] == ' ')
                 check = true;
             else if (!check) id +=cmd[i];
-            else var+= cmd[i];
+            else var += cmd[i];
         }
-        //cout << id << endl << var << endl;
-        newhead.insert(id, var);
-        newhead.get_value();
-        cout << "====================" <<endl;
+        new_head.insert(id, var);
+        new_head.get_value();
+        if (!filename.eof()) cout << "====================" << endl;
     }
 }
 
-int main(){
+int main() {
     string file_name = "test.txt";
     readfile (file_name);
-    Pair p;
-    p.num = 9;
-    p.code = 1;
+
     return 0;
 }
