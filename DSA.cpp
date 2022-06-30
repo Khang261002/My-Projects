@@ -71,6 +71,7 @@ void readfile(string file_name) {
     string cmd = "";
     while (!filename.eof()) {
         getline(filename, cmd);
+        
         if (!cmd.empty()) {
             string id = "";
             string var = "";
