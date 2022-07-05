@@ -1,11 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-using namespace std;
 
 struct Pair {
     float num;
-    int code;
+    bool code;
 };
 
 class Stack{
@@ -16,9 +15,9 @@ public:
         friend class Stack;
     public:
         Node(): next(nullptr) {};
-        Node(string e, bool f) {
-            data.num = stof(e);
-            data.code = f;
+        Node(std::string var, bool code) {
+            data.num = std::stof(var);
+            data.code = code;
             next = nullptr;
         }
     };
@@ -27,11 +26,11 @@ protected:
 public:
     Stack(): head(nullptr) {};
     ~Stack() {}
-    void insert(string id, string var);
+    void insert(std::string id, std::string var);
     void get_value();
 };
 
-void Stack::insert(string id, string var) {
+void Stack::insert(std::string id, std::string var) {
     bool check;
     if (id == "i") check = 0;
     else check = 1;
@@ -51,46 +50,46 @@ void Stack::insert(string id, string var) {
 
 void Stack::get_value() {
     if (!head) {
-        cout << "invalid";
+        std::cout << "invalid";
         return;
     }
     Node *tmp = head;
     int i = 1;
     while (tmp) {
-        cout << tmp->data.num << ' ' << tmp->data.code << endl;
+        std::cout << tmp->data.num << ' ' << tmp->data.code << std::endl;
         tmp = tmp->next;
         i++;
     }
     return;
 }
 
-void readfile(string file_name) {
-    fstream filename;
+void readfile(std::string file_name) {
+    std::fstream filename;
     Stack new_head;
     filename.open(file_name);
-    string cmd = "";
+    std::string cmd = "";
     while (!filename.eof()) {
-        getline(filename, cmd);
+        std::getline(filename, cmd);
         if (!cmd.empty()) {
-            string id = "";
-            string var = "";
+            std::string id = "";
+            std::string var = "";
             bool check = false;
-            for (int i = 0; i < int(cmd.size());i++){
+            for (int i = 0; i < int(cmd.size()); i++) {
                 if (cmd[i] == ' ')
                     check = true;
-                else if (!check) id +=cmd[i];
+                else if (!check) id += cmd[i];
                 else var += cmd[i];
             }
             new_head.insert(id, var);
             new_head.get_value();
-            if (!filename.eof()) cout << "====================" << endl;
+            if (!filename.eof()) std::cout << "====================" << std::endl;
         }
     }
 }
 
 int main() {
-    string file_name = "test.txt";
-    readfile (file_name);
+    std::string file_name = "test.txt";
+    readfile(file_name);
 
     return 0;
 }
