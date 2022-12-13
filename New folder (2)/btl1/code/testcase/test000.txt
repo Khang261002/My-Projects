@@ -1,2 +1,0 @@
-iconst 3
-top

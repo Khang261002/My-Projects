@@ -1,3 +1,0 @@
-iconst 3
-istore 0
-val 0

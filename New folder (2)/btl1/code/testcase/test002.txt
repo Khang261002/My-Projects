@@ -1,4 +1,0 @@
-iconst 3
-iconst 2
-imul
-top
