@@ -16,7 +16,7 @@ def move_pipes(pipes):
     return pipes
 
 def delete_pipes(pipes):
-    if pipes[0].centerx < 0:
+    if pipes and pipes[0].centerx < 0:
         pipes.pop(0)
     return pipes
 
