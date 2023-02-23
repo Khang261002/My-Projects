@@ -5,7 +5,8 @@ def draw_floor(w):
     screen.blit(floor_surface, (floor_x_pos + w, round(h*0.88)))
 
 def create_pipe():
-    random_pipe_pos = random.choice(pipe_height)
+    # random_pipe_pos = random.choice(pipe_height)
+    random_pipe_pos = random.randrange(400, 800, 100)
     bottom_pipe = pipe_surface.get_rect(midtop = (700, random_pipe_pos))
     top_pipe = pipe_surface.get_rect(midbottom = (700, random_pipe_pos - 300))
     return bottom_pipe, top_pipe
@@ -69,7 +70,7 @@ def score_display(game_state):
         screen.blit(highest_score_surface, highest_score_rect)
 
 # Main
-#pygame.mixer.pre_init(frequency = 44100, size = 16, channels = 1, buffer = 512)
+pygame.mixer.pre_init(frequency = 44100, size = 16, channels = 1, buffer = 512)
 pygame.init()
 screen = pygame.display.set_mode((576, 1024))
 clock = pygame.time.Clock()
@@ -78,7 +79,7 @@ game_font = pygame.font.Font('D:/Programming/Code/py/Games/Flappy Bird/FlappyBir
 # Game variables
 gravity = 0.2
 bird_movement = 0
-game_active = True
+game_active = False
 score = 0
 highest_score = 0
 
@@ -180,4 +181,4 @@ while True:
         floor_x_pos = 0
 
     pygame.display.update()
-    clock.tick(120)
+    clock.tick(120)     # FPS
