@@ -4,6 +4,9 @@ const canvasContext = canvas.getContext("2d");
 const fps = 60;
 count = 0;
 speed = 0;
+highest_score = 0;
+playing = true;
+var refreshId;
 
 class Snake {
     constructor(x,y,size) {
@@ -52,7 +55,7 @@ class Apple {
             isTouching = false;
             this.x = Math.floor(Math.random() * canvas.width/snake.size) * snake.size;
             this.y = Math.floor(Math.random() * canvas.height/snake.size) * snake.size;
-            for (var i = 0;i< snake.tail.length; i++) {
+            for (var i = 0; i < snake.tail.length; i++) {
                 if (this.x == snake.tail[i].x && this.y == snake.tail[i].y)
                     isTouching = true;
             }
@@ -71,7 +74,7 @@ window.onload = () => {
 }
 
 function gameLoop() {
-    setInterval(show, 1000/fps);
+    refreshId = setInterval(show, 1000/fps);
 }
 
 function show() {
@@ -79,23 +82,44 @@ function show() {
     if (count == 10 - speed) update();
     else if (count > 10 - speed) count = 0;
     draw();
+    if (!playing) clearInterval(refreshId);
 }
 
 function update() {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
     console.log("update");
     snake.move();
-    eatApple();
     checkHitWall();
+    checkHitSelf();
+    eatApple();
+}
+
+function checkHitSelf() {
+    let hit = false;
+    let snake_head = snake.tail[snake.tail.length - 1];
+
+    // function duplicates(element) {
+    //     return element.x == snake_head.x && element.y == snake_head.y;
+    // }
+    // let collision = arr => arr.filter(duplicates);
+    let collision = arr => arr.filter(element => element.x == snake_head.x && element.y == snake_head.y);
+    if (collision(snake.tail).length > 1) hit = true;
+    
+    if (hit == true) {
+        count = 0;
+        speed = 0;
+        highest_score = snake.tail.length - 1;
+        playing = false;
+    }
 }
 
 function eatApple() {
     if (snake.tail[snake.tail.length - 1].x == apple.x &&
         snake.tail[snake.tail.length - 1].y == apple.y) {
-            snake.tail[snake.tail.length] = {x: apple.x, y: apple.y}
+            snake.tail.unshift({x: snake.tail[0].x, y: snake.tail[0].y})
             apple = new Apple();
             if (speed != 6 && snake.tail.length % 5 == 0) speed++;
-        }
+    }
 }
 
 function checkHitWall() {
