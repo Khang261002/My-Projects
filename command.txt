@@ -1,0 +1,6 @@
+git add -A (add all)
+git commit -m "xxx" (get comment)
+git push
+
+python:
+pip install ... (in almost case)
