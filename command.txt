@@ -1,8 +1,9 @@
 git add -A (add all)
 git commit -m "xxx" (get comment)
-git push
+git push (upload pc to git)
+git pull (clone git to pc)
 
 python:
 pip install ... (in almost case)
 
-java
+java:
