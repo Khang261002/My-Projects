@@ -1,4 +1,4 @@
-import pygame, sys, random, math
+import pygame, sys, random, math, os
 
 def draw_floor(w):
     screen.blit(floor_surface, (floor_x_pos, round(h*0.88)))
@@ -70,11 +70,12 @@ def score_display(game_state):
         screen.blit(highest_score_surface, highest_score_rect)
 
 # Main
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 pygame.mixer.pre_init(frequency = 44100, size = 16, channels = 1, buffer = 512)
 pygame.init()
 screen = pygame.display.set_mode((576, 1024))
 clock = pygame.time.Clock()
-game_font = pygame.font.Font('D:/Programming/Code/py/Games/Flappy Bird/FlappyBird_Python-master/04B_19.ttf', 40)
+game_font = pygame.font.Font(os.path.join(__location__, 'FlappyBird_Python-master/04B_19.ttf'), 40)
 
 # Game variables
 gravity = 0.2
@@ -84,17 +85,17 @@ score = 0
 highest_score = 0
 
 w, h = pygame.display.get_surface().get_size()
-bg_surface = pygame.image.load('D:/Programming/Code/py/Games/Flappy Bird/assets/background-day.png').convert()
+bg_surface = pygame.image.load(os.path.join(__location__, 'assets/background-day.png')).convert()
 bg_surface = pygame.transform.scale(bg_surface, (w, h))
 
-floor_surface = pygame.image.load('D:/Programming/Code/py/Games/Flappy Bird/assets/base.png').convert()
+floor_surface = pygame.image.load(os.path.join(__location__, 'assets/base.png')).convert()
 floor_surface = pygame.transform.scale2x(floor_surface)
 w_floor = floor_surface.get_width()
 floor_x_pos = 0
 
-bird_downflap = pygame.transform.scale2x(pygame.image.load('D:/Programming/Code/py/Games/Flappy Bird/assets/bluebird-downflap.png').convert_alpha())
-bird_midflap = pygame.transform.scale2x(pygame.image.load('D:/Programming/Code/py/Games/Flappy Bird/assets/bluebird-midflap.png').convert_alpha())
-bird_upflap = pygame.transform.scale2x(pygame.image.load('D:/Programming/Code/py/Games/Flappy Bird/assets/bluebird-upflap.png').convert_alpha())
+bird_downflap = pygame.transform.scale2x(pygame.image.load(os.path.join(__location__, 'assets/bluebird-downflap.png')).convert_alpha())
+bird_midflap = pygame.transform.scale2x(pygame.image.load(os.path.join(__location__, 'assets/bluebird-midflap.png')).convert_alpha())
+bird_upflap = pygame.transform.scale2x(pygame.image.load(os.path.join(__location__, 'assets/bluebird-upflap.png')).convert_alpha())
 bird_frames = [bird_downflap, bird_midflap, bird_upflap]
 bird_index = 0
 bird_surface = bird_frames[bird_index]
@@ -107,19 +108,19 @@ bird_surface = pygame.transform.scale2x(bird_surface)
 bird_rect = bird_surface.get_rect(center = (100, round(round(h*0.88)/2)))
 """
 
-pipe_surface = pygame.image.load('D:/Programming/Code/py/Games/Flappy Bird/assets/pipe-green.png').convert()
+pipe_surface = pygame.image.load(os.path.join(__location__, 'assets/pipe-green.png')).convert()
 pipe_surface = pygame.transform.scale2x(pipe_surface)
 pipe_list = []
 SPAWNPIPE = pygame.USEREVENT
 pygame.time.set_timer(SPAWNPIPE, 1200)
 pipe_height = [400, 600, 800]
 
-game_over_surface = pygame.transform.scale2x(pygame.image.load('D:/Programming/Code/py/Games/Flappy Bird/assets/message.png').convert_alpha())
+game_over_surface = pygame.transform.scale2x(pygame.image.load(os.path.join(__location__, 'assets/message.png')).convert_alpha())
 game_over_rect = game_over_surface.get_rect(center = (288, 500))
 
-flap_sound = pygame.mixer.Sound('D:/Programming/Code/py/Games/Flappy Bird/sound/sfx_wing.wav')
-death_sound = pygame.mixer.Sound('D:/Programming/Code/py/Games/Flappy Bird/sound/sfx_die.wav')
-score_sound = pygame.mixer.Sound('D:/Programming/Code/py/Games/Flappy Bird/sound/sfx_point.wav')
+flap_sound = pygame.mixer.Sound(os.path.join(__location__, 'sound/sfx_wing.wav'))
+death_sound = pygame.mixer.Sound(os.path.join(__location__, 'sound/sfx_die.wav'))
+score_sound = pygame.mixer.Sound(os.path.join(__location__, 'sound/sfx_point.wav'))
 
 while True:
     for event in pygame.event.get():

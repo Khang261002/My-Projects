@@ -2,13 +2,13 @@ import cv2
 import operator
 
 def rainbow_autochange():
-    global rgb, t, increase
-    if (rgb[t] == 0 and increase == False) or (rgb[t] == 255 and increase == True):
+    global rgb, index, increase
+    if (rgb[index] == 0 and increase == False) or (rgb[index] == 255 and increase == True):
         increase = operator.not_(increase)
-        t -= 1
-        if t == -1:
-            t = 2
-    rgb[t] -= 5*((-1)**(int(increase)))
+        index -= 1
+        if index == -1:
+            index = 2
+    rgb[index] -= 5*((-1)**(int(increase)))
 
 trained_face_data = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 webcam = cv2.VideoCapture(1, cv2.CAP_DSHOW)
@@ -44,36 +44,36 @@ print('#----------------------------#\n\tCode Completed')
 r = 255
 g = b = 0
 def rgb_autochange():
-    global r, g, b, increase, t
-    if t == 1:
+    global r, g, b, increase, index
+    if index == 1:
         if increase:
             if g < 255:
                 g += 5
             else:
                 increase = False
-                t = 2
+                index = 2
                 r -= 5
         else:
             if g > 0:
                 g -= 5
             else:
                 increase = True
-                t = 2
+                index = 2
                 r += 5
-    elif t == 2:
+    elif index == 2:
         if increase:
             if r < 255:
                 r += 5
             else:
                 increase = False
-                t = 3
+                index = 3
                 b -= 5
         else:
             if r > 0:
                 r -= 5
             else:
                 increase = True
-                t = 3
+                index = 3
                 b += 5
     else:
         if increase:
@@ -81,34 +81,34 @@ def rgb_autochange():
                 b += 5
             else:
                 increase = False
-                t = 1
+                index = 1
                 g -= 5
         else:
             if b > 0:
                 b -= 5
             else:
                 increase = True
-                t = 1
+                index = 1
                 g += 5
 
 def rainbow_autochange():
-    global rgb, t, increase
+    global rgb, index, increase
     if increase:
-        if rgb[t] < 255:
-            rgb[t] += 5
+        if rgb[index] < 255:
+            rgb[index] += 5
         else:
             increase = False
-            t -= 1
-            if t == -1:
-                t = 2
-            rgb[t] -= 5
+            index -= 1
+            if index == -1:
+                index = 2
+            rgb[index] -= 5
     else:
-        if rgb[t] > 0:
-            rgb[t] -= 5
+        if rgb[index] > 0:
+            rgb[index] -= 5
         else:
             increase = True
-            t -= 1
-            if t == -1:
-                t = 2
-            rgb[t] += 5
+            index -= 1
+            if index == -1:
+                index = 2
+            rgb[index] += 5
 '''
