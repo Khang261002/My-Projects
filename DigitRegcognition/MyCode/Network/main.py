@@ -1,12 +1,14 @@
 #### Libraries
+### Third-party Libraries
+import numpy as np
+import sys
+sys.path.insert(0, './MyCode/Data_Loader')
+
 # My libraries
 import hand_drawing
 import mnist_loader
 import network
 import os
-
-### Third-party Libraries
-import numpy as np
 
 if __name__ == "__main__":
     training_data, validation_data, test_data = \

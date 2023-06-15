@@ -5,15 +5,16 @@ mnist_svm
 A classifier program for recognizing handwritten digits from the MNIST
 data set, using an SVM classifier."""
 
-#### Libraries
-# My libraries
-import hand_drawing
-import mnist_loader
-
-# Third-party libraries
+#### Libraries# Third-party libraries
+import sys
+sys.path.insert(0, './MyCode/Data_Loader')
 import os
 import joblib
 from sklearn import svm
+
+# My libraries
+import hand_drawing
+import mnist_loader
 
 # main
 def svm_baseline():

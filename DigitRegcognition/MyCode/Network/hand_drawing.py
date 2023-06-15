@@ -1,4 +1,3 @@
-from sklearn import svm
 import numpy as np
 import network
 import cv2
@@ -65,10 +64,7 @@ def check_drawing(model):
         
         img = cv2.resize(img, (28, 28))
         img = np.multiply(img, 1/255)
-        if type(model) == svm._classes.SVC:
-            img = np.reshape(img, (1, 784))
-            print("The digit is %d" % int(model.predict(img)))
-        elif type(model) == network.Network:
+        if type(model) == network.Network:
             img = np.reshape(img, (784, 1))
             print("The digit is %d" % model.directly_test(img))
 
