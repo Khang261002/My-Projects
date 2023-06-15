@@ -24,5 +24,5 @@ if __name__ == "__main__":
             monitor_evaluation_accuracy=True,
             monitor_training_cost=True,
             early_stopping_n=10)
-        net.save("trained_model.txt")
+        net.save(os.path.join(__location__, "trained_model.txt"))
     hand_drawing.check_drawing(net)
