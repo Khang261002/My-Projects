@@ -2,5 +2,8 @@
     "files.associations": {
         "iostream": "cpp",
         "iosfwd": "cpp"
-    }
+    },
+    "python.analysis.extraPaths": [
+        "./DigitRecognition/MyCode/Data_Loader"
+    ]
 }

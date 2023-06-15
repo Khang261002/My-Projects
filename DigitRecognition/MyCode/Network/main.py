@@ -2,7 +2,7 @@
 ### Third-party Libraries
 import numpy as np
 import sys
-sys.path.insert(0, './MyCode/Data_Loader')
+sys.path.insert(0, './DigitRecognition/MyCode/Data_Loader')
 
 # My libraries
 import hand_drawing

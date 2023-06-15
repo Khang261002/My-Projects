@@ -7,7 +7,7 @@ data set, using an SVM classifier."""
 
 #### Libraries# Third-party libraries
 import sys
-sys.path.insert(0, './MyCode/Data_Loader')
+sys.path.insert(0, './DigitRecognition/MyCode/Data_Loader')
 import os
 import joblib
 from sklearn import svm
