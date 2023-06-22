@@ -29,4 +29,4 @@ if __name__ == '__main__':
                 validation_data, test_data, lmbda=0.1, early_stopping_n=10)
     hand_drawing.check_drawing(net)
 
-# run with python 3.5: py -3.5 -u "./MyCode/Network3/main.py"
+# run with python 3.5: py -3.5 -u "./DigitRecognition/MyCode/Network3/main.py"
