@@ -209,22 +209,22 @@ class Network(object):
                     print("Training mini-batch number {0}".format(iteration))
                 cost_ij = train_mb(mini_batch_index)
                 if (iteration + 1) % num_training_batches == 0:
-                    validation_cost = np.mean( 
-                        [validate_mb_cost(j) for j in range(num_validation_batches)])
+                    # validation_cost = np.mean( 
+                    #     [validate_mb_cost(j) for j in range(num_validation_batches)])
                     validation_accuracy = np.mean(
                         [validate_mb_accuracy(j) for j in range(num_validation_batches)])
                     print("Epoch {0}: validation accuracy {1:.2%}".format(
                         epoch, validation_accuracy))
-                    train_cost = np.mean(
-                        [train_mb_cost(j) for j in range(num_training_batches)])
-                    train_accuracy = np.mean(
-                        [train_mb_accuracy(j) for j in range(num_training_batches)])
+                    # train_cost = np.mean(
+                    #     [train_mb_cost(j) for j in range(num_training_batches)])
+                    # train_accuracy = np.mean(
+                    #     [train_mb_accuracy(j) for j in range(num_training_batches)])
                     
                     # save 4 return lists
-                    evaluation_cost.append(validation_cost)
-                    evaluation_accuracy.append(validation_accuracy)
-                    training_cost.append(train_cost)
-                    training_accuracy.append(train_accuracy)
+                    # evaluation_cost.append(validation_cost)
+                    # evaluation_accuracy.append(validation_accuracy)
+                    # training_cost.append(train_cost)
+                    # training_accuracy.append(train_accuracy)
                     
                     if validation_accuracy > best_validation_accuracy:
                         print("This is the best validation accuracy to date.")
@@ -245,7 +245,7 @@ class Network(object):
                     #print("Early-stopping: Best so far {}".format(best_accuracy))
                 else:
                     no_accuracy_change += 1
-
+                    print("Current number of no-accuracy changes: {}".format(no_accuracy_change))
                 if (no_accuracy_change == early_stopping_n):
                     #print("Early-stopping: No accuracy change in last epochs: {}".format(early_stopping_n))
                     break
@@ -259,23 +259,16 @@ class Network(object):
             best_validation_accuracy, best_iteration))
         print("Corresponding test accuracy of {0:.2%}".format(test_accuracy))
 
-        return evaluation_cost, evaluation_accuracy, \
-            training_cost, training_accuracy
+        # return evaluation_cost, evaluation_accuracy, \
+        #     training_cost, training_accuracy
 
     def load_network():
-        """
-        An example of how to load a trained model and use it
-        to predict labels.
-        """
         # load the saved model
         net = pickle.load(open(os.path.join(__location__, "Model/best_model.pkl"), 'rb'))
         return net
 
-    def predict(self, img):
-        mini_batch_size = 10
-
-        # predict
-        img = np.repeat(img, repeats=mini_batch_size, axis=0)
+    def predict(self, img):# predict
+        img = np.repeat(img, repeats=self.mini_batch_size, axis=0)
         img = theano.shared(
             np.asarray(img, dtype=theano.config.floatX), borrow=True)
 
@@ -285,7 +278,7 @@ class Network(object):
             [i], self.layers[-1].y_out,
             givens={
                 self.x:
-                img[i*mini_batch_size: (i + 1)*mini_batch_size]
+                img[i*self.mini_batch_size: (i + 1)*self.mini_batch_size]
             })
 
         test_predictions = test_mb_predictions(0)
