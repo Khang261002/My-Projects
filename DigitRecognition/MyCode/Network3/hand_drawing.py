@@ -1,4 +1,5 @@
 import numpy as np
+import new_network3
 import network3
 import cv2
 
@@ -65,6 +66,9 @@ def check_drawing(model):
         img = cv2.resize(img, (28, 28))
         img = np.multiply(img, 1/255)
         if type(model) == network3.Network:
+            img = np.reshape(img, (1, 784))
+            print("The digit is %d" % model.predict(img))
+        if type(model) == new_network3.Network:
             img = np.reshape(img, (1, 784))
             print("The digit is %d" % model.predict(img))
 
