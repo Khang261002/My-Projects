@@ -37,7 +37,7 @@ if __name__ == '__main__':
 # model_3:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.41%
 # model_4:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.46%
 # model_5:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.45%
-# model_6:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.60% (Best)
+# best_model:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.60%
 # model_7:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.48%
 # model_8:      new_network3, mnist_expanded.pkl.gz, 60 epochs,
 #               early_stopping_n = 20, constant_eta = False, new_eta = eta/2 --> 99.55%
@@ -46,6 +46,6 @@ if __name__ == '__main__':
 # model_10:     new_network3, mnist_expanded.pkl.gz, 60 epochs,
 #               early_stopping_n = 20, constant_eta = False,
 #               new_eta = eta/(1.0 + eta_decrease_factor*(epoch + 1)) --> 99.49%
-# best_model:   new_network3, mnist_expanded.pkl.gz, 60 epochs,
+# model_11:   new_network3, mnist_expanded.pkl.gz, 60 epochs,
 #               early_stopping_n = 20, constant_eta = False,
 #               new_eta = eta/(1.0 + eta_decrease_factor*(epoch + 1)) --> 99.52%
