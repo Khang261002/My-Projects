@@ -19,7 +19,7 @@ import mnist_loader
 # main
 def svm_baseline():
     __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    if not os.path.isfile(os.path.join(__location__, "expanded_model.sav")):
+    if not os.path.isfile(os.path.join(__location__, "Model/expanded_model.sav")):
         training_data, validation_data, test_data = mnist_loader.load_data()
         # train
         print("Training ...")

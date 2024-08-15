@@ -1,2 +1,3 @@
 Download the trained models from the link:
-https://drive.google.com/drive/folders/1xhAotq67IPshWDNmmiy4JuPey76qZGZy?usp=drive_link
+- Google Drive: https://drive.google.com/drive/folders/1xhAotq67IPshWDNmmiy4JuPey76qZGZy?usp=drive_link
+- Dropbox: https://www.dropbox.com/scl/fi/0ejusux3o7quewrn7amv1/Model.zip?rlkey=wm762ugmy4pz7cx6c1a84ubni&st=wfeg2um2&dl=0

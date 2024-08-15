@@ -1,4 +1,5 @@
 The file "mnist_expanded.pkl.gz" in this folder is from the displacement of images.
 For the complete "mnist_expanded.pkl.gz" applied both displacement and rotation,
-download from the link:
-https://drive.google.com/drive/folders/1PoTDVXZva9zqxvKcn4EG0C1sC7I2Wlf9?usp=sharing
+rename the current "mnist_expanded.pkl.gz" file and download from the link below:
+- Google Drive: https://drive.google.com/drive/folders/1PoTDVXZva9zqxvKcn4EG0C1sC7I2Wlf9?usp=sharing
+- Dropbox: https://www.dropbox.com/scl/fi/e428ezzagdok5s2r803nn/mnist_expanded.pkl.gz?rlkey=37mxjwhens3gb08a2of32d5u3&st=x2n2stfm&dl=0

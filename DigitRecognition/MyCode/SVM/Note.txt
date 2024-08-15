@@ -1,2 +1,3 @@
 Download the trained SVM models from link:
-https://drive.google.com/drive/folders/1svifWtRPy_1opRQd8n_GQlbr8dPsSpOW?usp=sharing
+- Google Drive: https://drive.google.com/drive/folders/1svifWtRPy_1opRQd8n_GQlbr8dPsSpOW?usp=sharing
+- Dropbox: https://www.dropbox.com/scl/fi/rqkaj9y4wnxxp6rvjvurc/SVM-Model.zip?rlkey=p5053cmnbsq09uz2lo6mm039b&st=e2lybctz&dl=0
