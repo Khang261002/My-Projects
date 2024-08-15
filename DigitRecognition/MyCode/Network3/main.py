@@ -1,6 +1,6 @@
 import os
 import new_network3
-import hand_drawing
+import new_hand_drawing
 # softmax plus log-likelihood cost is more common in modern image classification networks.
 from new_network3 import Network, ConvPoolLayer, FullyConnectedLayer, SoftmaxLayer, ReLU
 
@@ -28,24 +28,30 @@ if __name__ == '__main__':
             SoftmaxLayer(n_in=100, n_out=10)], mini_batch_size)
         net.SGD(training_data, 60, mini_batch_size, 0.03, validation_data, test_data,
                 lmbda=0.1, early_stopping_n=20, constant_eta=False)
-    hand_drawing.check_drawing(net)
+    new_hand_drawing.check_drawing(net)
 
-# run with python 3.5: py -3.5 -u "./MyCode/Network3/main.py"
+# run with python 3.x (3.7 in this case): py -3.7 -u "./DigitRecognition/MyCode/Network3/main.py"
 # model_0:      test 10 epochs
-# model_1:      mnist.pkl.gz, 60 epochs, early_stopping_n = 10 --> 99.13%
-# model_2:      mnist_displacement_expanded.pkl.gz, 60 epochs, early_stopping_n = 10 --> 99.43%
-# model_3:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.41%
-# model_4:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.46%
-# model_5:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.45%
-# best_model:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.60%
-# model_7:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20 --> 99.48%
+# model_1:      mnist.pkl.gz, 60 epochs, early_stopping_n = 10                          --> 99.13%
+# model_2:      mnist_displacement_expanded.pkl.gz, 60 epochs, early_stopping_n = 10    --> 99.43%
+
+# model_3:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20                 --> 99.41%
+# model_4:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20                 --> 99.46%
+# model_5:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20                 --> 99.45%
+# model_6:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20                 --> 99.60% (Best)
+# model_7:      mnist_expanded.pkl.gz, 60 epochs, early_stopping_n = 20                 --> 99.48%
+
 # model_8:      new_network3, mnist_expanded.pkl.gz, 60 epochs,
-#               early_stopping_n = 20, constant_eta = False, new_eta = eta/2 --> 99.55%
+#               early_stopping_n = 20, constant_eta = False, new_eta = eta/2            --> 99.55%
 # model_9:      new_network3, mnist_expanded.pkl.gz, 60 epochs,
-#               early_stopping_n = 20, constant_eta = False, new_eta = eta/2 --> 99.46%
+#               early_stopping_n = 20, constant_eta = False, new_eta = eta/2            --> 99.46%
+
 # model_10:     new_network3, mnist_expanded.pkl.gz, 60 epochs,
 #               early_stopping_n = 20, constant_eta = False,
-#               new_eta = eta/(1.0 + eta_decrease_factor*(epoch + 1)) --> 99.49%
-# model_11:   new_network3, mnist_expanded.pkl.gz, 60 epochs,
+#               new_eta = eta/(1.0 + eta_decrease_factor*(epoch + 1))                   --> 99.49%
+# model_11:     new_network3, mnist_expanded.pkl.gz, 60 epochs,
 #               early_stopping_n = 20, constant_eta = False,
-#               new_eta = eta/(1.0 + eta_decrease_factor*(epoch + 1)) --> 99.52%
+#               new_eta = eta/(1.0 + eta_decrease_factor*(epoch + 1))                   --> 99.52%
+# model_12:     new_network3, mnist_expanded.pkl.gz, 60 epochs,
+#               early_stopping_n = 20, constant_eta = False,
+#               new_eta = eta/(1.0 + eta_decrease_factor*(epoch + 1))                   --> 99.47%
