@@ -170,7 +170,7 @@ function draw() {
     canvasContext.fillStyle = "#00FF42";
     canvasContext.fillText(
         "Highest Score: " + (highest_score),
-        0,
+        5,
         18
     );
 
