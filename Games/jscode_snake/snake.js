@@ -4,6 +4,7 @@ const canvasContext = canvas.getContext("2d");
 const fps = 60;
 count = 0;
 speed = 0;
+score = 0;
 highest_score = 0;
 playing = true;
 var refreshId;
@@ -72,6 +73,23 @@ let apple = new Apple();
 window.onload = () => {
     gameLoop();
 }
+canvas.addEventListener("click", (event) => {
+    if (!playing) {
+        let rect = canvas.getBoundingClientRect();
+        let x = event.clientX - rect.left;
+        let y = event.clientY - rect.top;
+
+        // Check if click is inside the replay button
+        if (
+            x >= canvas.width / 2 - 60 &&
+            x <= canvas.width / 2 + 60 &&
+            y >= canvas.height / 2 + 30 &&
+            y <= canvas.height / 2 + 70
+        ) {
+            restartGame();
+        }
+    }
+});
 
 function gameLoop() {
     refreshId = setInterval(show, 1000/fps);
@@ -87,7 +105,7 @@ function show() {
 
 function update() {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-    console.log("update");
+    // console.log("update");
     snake.move();
     checkHitWall();
     checkHitSelf();
@@ -108,7 +126,6 @@ function checkHitSelf() {
     if (hit == true) {
         count = 0;
         speed = 0;
-        highest_score = snake.tail.length - 1;
         playing = false;
     }
 }
@@ -138,6 +155,25 @@ function checkHitWall() {
 
 function draw() {
     createRect(0, 0, canvas.width, canvas.height, "black");
+
+    score = snake.tail.length - 1
+    canvasContext.font = "20px Arial";
+    canvasContext.fillStyle = "#00FF42";
+    canvasContext.fillText(
+        "Score: " + (score),
+        canvas.width - 70 - ((snake.tail.length - 1).toString().length)*10,
+        18
+    );
+
+    (highest_score < score) && (highest_score = score);
+    canvasContext.font = "20px Arial";
+    canvasContext.fillStyle = "#00FF42";
+    canvasContext.fillText(
+        "Highest Score: " + (highest_score),
+        0,
+        18
+    );
+
     // createRect(0, 0, canvas.width, canvas.height);
     for (var i = 0; i < snake.tail.length; i++) {
         createRect(
@@ -148,13 +184,7 @@ function draw() {
             "white"
         );
     }
-    canvasContext.font = "20px Arial";
-    canvasContext.fillStyle = "#00FF42";
-    canvasContext.fillText(
-        "Score: " + (snake.tail.length - 1),
-        canvas.width - 70 - ((snake.tail.length - 1).toString().length)*10,
-        18
-    );
+
     createRect(
         apple.x,
         apple.y,
@@ -162,6 +192,51 @@ function draw() {
         apple.size,
         apple.color
     );
+
+    // If Game Over, Show Replay Screen
+    if (!playing) {
+        canvasContext.fillStyle = "rgba(0, 0, 0, 0.7)"; // Semi-transparent black overlay
+        canvasContext.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Display Game Over Text
+        canvasContext.fillStyle = "white";
+        canvasContext.font = "30px Arial";
+        canvasContext.fillText(
+            "Game Over!",
+            canvas.width / 2 - 80,
+            canvas.height / 2 - 50
+        );
+
+        // Display Highest Score
+        canvasContext.font = "20px Arial";
+        canvasContext.fillStyle = "#00FF42";
+        canvasContext.fillText(
+            "Highest Score: " + highest_score,
+            canvas.width / 2 - 80,
+            canvas.height / 2 - 10
+        );
+
+        // Display Highest Score
+        canvasContext.font = "20px Arial";
+        canvasContext.fillStyle = "#00FF42";
+        canvasContext.fillText(
+            "Score: " + score,
+            canvas.width / 2 - 80,
+            canvas.height / 2 + 20
+        );
+
+        // Display Replay Button
+        canvasContext.fillStyle = "#00FF42";
+        canvasContext.fillRect(canvas.width / 2 - 60, canvas.height / 2 + 40, 120, 40);
+
+        canvasContext.fillStyle = "black";
+        canvasContext.font = "20px Arial";
+        canvasContext.fillText(
+            "Replay",
+            canvas.width / 2 - 30,
+            canvas.height / 2 + 65
+        );
+    }
 }
 
 function createRect(x, y, width, height, color) {
@@ -186,3 +261,12 @@ window.addEventListener("keydown", (event) => {
         }
     }, 1);
 });
+
+function restartGame() {
+    snake = new Snake(20, 20, 20); // Reset snake
+    apple = new Apple(); // Generate new apple
+    playing = true; // Set playing to true
+    count = 0;
+    speed = 0;
+    gameLoop(); // Restart game loop
+}
